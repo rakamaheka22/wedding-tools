@@ -6,7 +6,7 @@
       <button @click="fetchData('SESI2')">SESI 2</button>
     </div>
     <ul>
-      <li v-for="(items, index) in listInvite" :key="index">
+      <li v-for="(items, index) in listInvite" :key="index" :style="!items.link ? 'background: #ffec9e' : ''">
         <div class="flex">
           <div>{{ items.nama }}</div>
           <div class="sharing">
