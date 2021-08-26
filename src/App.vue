@@ -172,6 +172,15 @@ _*Dimohon Bapak/Ibu/Saudara/i hadir pada acara ${schedule}*_
           break;
         case 'tele':
 
+          axios.put(`${BASE_URL}/${this.sesi}`, {
+            condition: {
+              id
+            },
+            set: {
+              status: 'TRUE'
+            }
+          }).then(res => console.log(res.data));
+
           window.open(`tg://msg?text=${encodeURI(descTele)}`);
           
           break;
