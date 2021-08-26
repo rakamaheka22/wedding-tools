@@ -182,11 +182,14 @@ _*Dimohon Bapak/Ibu/Saudara/i hadir pada acara ${schedule}*_
     },
     async addRow() {
       if (this.payload.nama) {
+
+        const nama = this.payload.nama.replace('&', 'dan');
+
         const req = [
           {
             id: this.payload.nama.substring(0, 3) + Math.floor(100000 + Math.random() * 900000),
-            nama: this.payload.nama,
-            link: `https://muthiaraka.weddingwish.id/?name=${encodeURI(this.payload.nama)}`,
+            nama,
+            link: `https://muthiaraka.weddingwish.id/?name=${encodeURI(nama)}`,
             telp: this.payload.telp,
             status: 'FALSE'
           }
