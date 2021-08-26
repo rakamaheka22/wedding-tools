@@ -49,7 +49,6 @@ export default {
 
 Kepada Yth.
 Bapak/Ibu/Saudara/i
-**Nama tamu undangan**
 
 **${name}**
 
@@ -86,7 +85,6 @@ __________
 
 Kepada Yth.
 Bapak/Ibu/Saudara/i
-*Nama tamu undangan*
 
 *${name}*
 
