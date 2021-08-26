@@ -10,8 +10,8 @@
         <div class="flex">
           <div>{{ items.nama }}</div>
           <div class="sharing">
-            <button class="wa" @click="shareSocial(items.link, items.telp, 'wa')">WA</button>
-            <button class="tele" @click="shareSocial(items.link, items.telp, 'tele')">Tele</button>
+            <button class="wa" @click="shareSocial(items.link, items.telp, items.nama, 'wa')">WA</button>
+            <button class="tele" @click="shareSocial(items.link, items.telp, items.nama, 'tele')">Tele</button>
           </div>
         </div>
       </li>
@@ -40,7 +40,7 @@ export default {
       this.sesi = type;
       axios.get(`${BASE_URL}/${type}`).then(res => this.listInvite = res.data);
     },
-    shareSocial(link, telp, type) {
+    shareSocial(link, telp, name, type) {
       const schedule = this.sesi === 'SESI1' ? 'Sesi 1: Pukul 11.00-13.00' : 'Sesi 2: Pukul 13.00-14.00';
 
 
@@ -50,7 +50,8 @@ export default {
 Kepada Yth.
 Bapak/Ibu/Saudara/i
 **Nama tamu undangan**
-________
+
+**${name}**
 
 بسم اللّه الرحمن الرحمن الر حيم
 __Assalamu’alaikum Warahmatullaahi Wabarakaatuh__
@@ -86,7 +87,8 @@ __________
 Kepada Yth.
 Bapak/Ibu/Saudara/i
 *Nama tamu undangan*
-________
+
+*${name}*
 
 بسم اللّه الرحمن الرحمن الر حيم
 _Assalamu’alaikum Warahmatullaahi Wabarakaatuh_
