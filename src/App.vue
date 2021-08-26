@@ -1,6 +1,19 @@
 <template>
   <div>
     <h1>List Wedding Invitation Muthia & Raka</h1>
+    <div class="invitation">
+      <input v-model="payload.nama" type="text" class="inputfield" placeholder="Nama: (Contoh: Raka Maheka)">
+      <br />
+      <input v-model="payload.telp" type="text" class="inputfield" placeholder="No Telp: (Contoh: 085798291910)">
+      <br />
+      <select v-model="payload.sesi">
+        <option value="" selected>Pilih Sesi</option>
+        <option value="SESI1">Sesi 1</option>
+        <option value="SESI2">Sesi 2</option>
+      </select>
+      <br />
+      <button @click="addRow">Buat Undangan</button>
+    </div>
     <div class="tab">
       <button @click="fetchData('SESI1')">SESI 1</button>
       <button @click="fetchData('SESI2')">SESI 2</button>
@@ -37,6 +50,11 @@ export default {
     return {
       listInvite: [],
       sesi: 'SESI1',
+      payload: {
+        nama: '',
+        telp: '',
+        sesi: ''
+      }
     }
   },
   mounted() {
@@ -162,6 +180,21 @@ _*Dimohon Bapak/Ibu/Saudara/i hadir pada acara ${schedule}*_
           break;
       }
     },
+    async addRow() {
+      if (this.payload.nama) {
+        const req = [
+          {
+            id: this.payload.nama.substring(0, 3) + Math.floor(100000 + Math.random() * 900000),
+            nama: this.payload.nama,
+            link: `https://muthiaraka.weddingwish.id/?name=${encodeURI(this.payload.nama)}`,
+            telp: this.payload.telp,
+            status: 'FALSE'
+          }
+        ];
+
+        axios.post(`${BASE_URL}/${this.payload.sesi}`, req).then(() => location.reload());
+      }
+    },
     convertPhoneNumberWithoutPlus(phone) {
       let phoneNumber = phone.toString()
       if (phoneNumber.startsWith('08')) {
@@ -281,6 +314,29 @@ button {
 .tele:hover {
   color: white;
   background: #13acff;
+}
+
+.invitation {
+  margin: 16px 10px;
+}
+
+.invitation input, .invitation select {
+  min-width: 300px;
+  border: 1px solid #2c3e50;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0px;
+}
+
+.invitation button {
+  background: #1f7ae5;
+  color: white;
+  margin: 10px 0px;
+}
+
+.invitation button:hover {
+  background: white;
+  color: #1f7ae5;
 }
 
 </style>
