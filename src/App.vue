@@ -51,6 +51,7 @@ Kepada Yth.
 Bapak/Ibu/Saudara/i
 
 **${name}**
+__________
 
 بسم اللّه الرحمن الرحمن الر حيم
 __Assalamu’alaikum Warahmatullaahi Wabarakaatuh__
@@ -87,6 +88,7 @@ Kepada Yth.
 Bapak/Ibu/Saudara/i
 
 *${name}*
+__________
 
 بسم اللّه الرحمن الرحمن الر حيم
 _Assalamu’alaikum Warahmatullaahi Wabarakaatuh_
