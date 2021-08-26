@@ -8,10 +8,17 @@
     <ul>
       <li v-for="(items, index) in listInvite" :key="index" :style="!items.link ? 'background: #ffec9e' : ''">
         <div class="flex">
-          <div>{{ items.nama }}</div>
+          <div>
+            {{ items.nama }}
+            <div style="margin-top: 5px">
+              <span :class="items.status === 'TRUE' ? 'green' : 'red'">
+                {{ items.status === 'TRUE' ? 'Sudah dishare' : 'Belum dishare' }}
+              </span>
+            </div>
+          </div>
           <div class="sharing">
-            <button class="wa" @click="shareSocial(items.link, items.telp, items.nama, 'wa')">WA</button>
-            <button class="tele" @click="shareSocial(items.link, items.telp, items.nama, 'tele')">Tele</button>
+            <button class="wa" @click="shareSocial(items.id, items.link, items.telp, items.nama, 'wa')">WA</button>
+            <button class="tele" @click="shareSocial(items.id, items.link, items.telp, items.nama, 'tele')">Tele</button>
           </div>
         </div>
       </li>
@@ -40,7 +47,7 @@ export default {
       this.sesi = type;
       axios.get(`${BASE_URL}/${type}`).then(res => this.listInvite = res.data);
     },
-    shareSocial(link, telp, name, type) {
+    shareSocial(id, link, telp, name, type) {
       const schedule = this.sesi === 'SESI1' ? 'Sesi 1: Pukul 11.00-13.00' : 'Sesi 2: Pukul 13.00-14.00';
 
 
@@ -129,6 +136,15 @@ _*Dimohon Bapak/Ibu/Saudara/i hadir pada acara ${schedule}*_
       switch (type) {
         case 'wa':
 
+          axios.put(`${BASE_URL}/${this.sesi}`, {
+            condition: {
+              id
+            },
+            set: {
+              status: 'TRUE'
+            }
+          }).then(res => console.log(res.data));
+
           if (phoneNumber) {
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURI(descWA)}`);
           } else {
@@ -200,9 +216,21 @@ li {
   font-weight: bold;
 }
 
-li:hover {
+li:hover, li:hover .green, li:hover .red {
   background: #1f7ae5;
   color: white;
+}
+
+li span {
+  font-size: 12px;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red  ;
 }
 
 .flex {
